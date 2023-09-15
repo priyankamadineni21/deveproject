@@ -1,10 +1,9 @@
+import { employeecafe } from "../entities/employeecafe";
 import  {   FastifyInstance } from "fastify";
-import { cafe } from "../entities/cafe";
 
-//-----------------------creating and updating a router----------------------------
 
 const cafeRouter = async (app: FastifyInstance) => {
-    app.post('/api/cafe', (req : any,res : any) => {
+    app.post('/api/employeecafe', (req : any,res : any) => {
         
         console.log(req.body)
         const {
@@ -14,25 +13,31 @@ const cafeRouter = async (app: FastifyInstance) => {
             name,
             totaldrinks,
             price,
-            isGiven
+            isGiven,
+            emid,
+            emname,
+            salary
         } = req.body;
-        const cafee = cafe.save({
+        const ecafee = employeecafe.save({
             tokennum,
             category,
             drinkopted,
             name,
             totaldrinks,
             price,
-            isGiven  
-            
+            isGiven,
+            emid,
+            emname,
+            salary 
         });
         res.send({body: req.body});
     });
 }
 
 export {
-    cafeRouter as createCafeRouter
+    cafeRouter as employeeCafeRouter
 }
+
 /*
 {
 "tokennum":"357",
@@ -41,6 +46,9 @@ export {
 "name":"harshi",
 "totaldrinks":"1",
 "price":"119",
-"isGiven":"yes"
+"isGiven":"yes",
+"emid":"2",
+"emname":"ayush",
+"salary":"7500"
 }
 */

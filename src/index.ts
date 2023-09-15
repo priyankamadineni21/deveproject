@@ -4,7 +4,11 @@ import { cafe } from "./entities/cafe";
 import { createCafeRouter } from "./routes/cafe-route";
 import { deleteCafeRouter } from "./routes/deleteroutecafe";
 import {queryCafeRouter} from "./routes/querycafe";
-
+import { employeecafe } from "./entities/employeecafe";
+import {transaction} from "./entities/transaction";
+import { employeeCafeRouter } from "./routes/employeecaferoute";
+import { createtransactionRouter } from "./routes/transactionroute";
+import {connectemployeecafetocafe} from "./routes/connect-cafe-employeecafe";
 // CommonJs
 const fastify = require('fastify')({
   logger: true
@@ -24,14 +28,27 @@ const fastify = require('fastify')({
       username: "postgres",
       password: "priya@123",
       database: "postgres",
-      entities:[cafe],
+      entities:[cafe,employeecafe,transaction],
       synchronize:true
     })
 
     await dataSource.initialize()
-    fastify.register(createCafeRouter)
+    // const cafeRepository = dataSource.getRepository(cafe)
+    // const tokennum = 10;
+    // const cafes = await cafeRepository.findOneBy({tokennum: 12})
+    // console.log(cafes);
+    
+    fastify.register(createCafeRouter, )
     fastify.register(deleteCafeRouter)
     fastify.register(queryCafeRouter)
+    fastify.register(employeeCafeRouter)
+    fastify.register(createtransactionRouter,{
+      dataSource
+    } )
+    fastify.register(connectemployeecafetocafe,{
+      dataSource
+    })
+    
   fastify.listen({ port: 8080,host: '127.0.0.1' }, function (err:any, address:any) {
     if (err) {
       fastify.log.error(err)
