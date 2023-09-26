@@ -1,12 +1,14 @@
 const getData = async (drinksRepo: any, reqBody: any) => {
     const { 
         drinkname,
-        drinkprice
+        drinkprice,
+        totaldrinks
     } = reqBody;
     const drinks = await drinksRepo.save({
         
         drinkname,
-        drinkprice
+        drinkprice,
+        totaldrinks
     });
     return drinks
 };

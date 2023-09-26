@@ -12,5 +12,7 @@ id:Number
 @Column()
 customername: string
 
+@Column()
+age: number
 }
 

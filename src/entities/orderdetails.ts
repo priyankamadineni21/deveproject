@@ -1,4 +1,4 @@
-import { Entity,CreateDateColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Entity,CreateDateColumn, ManyToOne, PrimaryGeneratedColumn, Column } from "typeorm";
 import { Customer } from "./customerdetails";
 import { Drinks } from "./drinklist";
 import { Employees } from "./employeedetails";
@@ -32,6 +32,5 @@ employees:Employees
 
 @CreateDateColumn()
    created_at:Date
-
 
 }

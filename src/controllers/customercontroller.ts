@@ -1,4 +1,4 @@
-import { deletecustomerData,customerservice } from "../services/customerservices";
+import { deletecustomerData,customerservice, getCustomerData } from "../services/customerservices";
 
 export const handleGetData = async (req:any, res:any) => {
     const customers = await customerservice(req.server.customerRepo, req.body)
@@ -8,7 +8,13 @@ export const handleDeleteData = async (req:any,res:any) =>{
     const deletecustomer = await deletecustomerData(req.server.customerRepo,req)
     res.send(deletecustomer);
 }
+
+export const handlegetData = async (req:any,res:any) => {
+     const getcustomer = await getCustomerData(req.server.customerRepo,req)
+     res.send(getcustomer)
+}
 export default {
 	handleGetData,
-    handleDeleteData
+    handleDeleteData,
+    handlegetData
 }

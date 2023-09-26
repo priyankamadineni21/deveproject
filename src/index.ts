@@ -8,7 +8,7 @@ import { Employees } from "./entities/employeedetails";
 import {employees} from "./routes/employeeroute"
 import { Orders } from "./entities/orderdetails";
 import {orders} from "./routes/orderroute";
-
+import {ormConfig} from "./ormconfig"
 
 const fastify = require('fastify')({
   logger: true
@@ -16,18 +16,9 @@ const fastify = require('fastify')({
 
   const main = async () => {
     try{ 
-      const dataSource = new DataSource({
-      type: "postgres",
-      host: "localhost",
-      port: 5432,
-      username: "postgres",
-      password: "priya@123",
-      database: "postgres",
-      entities:[Customer,Drinks,Employees,Orders],
-      synchronize:true
-    })
-
-    await dataSource.initialize()
+    const dataSource:DataSource = new DataSource(ormConfig)
+    await dataSource.initialize();
+  
     const customerRepo = dataSource.getRepository(Customer);
     fastify.decorate("customerRepo", customerRepo);
     const employeeRepo = dataSource.getRepository(Employees);

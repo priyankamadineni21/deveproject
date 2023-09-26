@@ -12,6 +12,10 @@ const detailsRoute = async (app:FastifyInstance)=>{
         "/customers/:id",
         customercontroller.handleDeleteData
     );
+    app.get(
+        "/getcustomers",
+        customercontroller.handleGetData
+    )
 };
 
 export { 

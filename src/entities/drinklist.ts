@@ -22,6 +22,8 @@ export class Drinks {
 	
 		@Column()
 		drinkprice: number
+        
+		
 	
 }
 

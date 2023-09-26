@@ -3,11 +3,13 @@ const getData = async (customerRepo: any, reqBody: any) => {
         //const customerrepository = customerRepo.getRepository(Customer)
         const { 
             id,
-            customername
+            customername,
+            age
         } = reqBody;
         const customers = await customerRepo.save({
             id,
-            customername
+            customername,
+            age
         });
         return customers
     }
@@ -19,7 +21,13 @@ const getData = async (customerRepo: any, reqBody: any) => {
          return response
         
     };
+
+    const getCustomerData = async (customerRepo:any,req:any) => {
+        const res = await customerRepo.get();
+        return res
+    }
 export {
      getData as customerservice,
-     deletecustomerData
+     deletecustomerData,
+     getCustomerData
 }

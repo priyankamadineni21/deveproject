@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --watch './**/*.ts' --exec 'ts-node' src/index.ts",
-    "dev:migrate" : "npm run typeorm migration:generate -- -n",
-    "dev:run" : "npm run typeorm migrations:run"
-    },
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/datasource.ts",
+    "typeorm:migrate": "npm run typeorm migration:generate ./src/migration/$npm_config_name",
+    "typeorm:run": "npm run typeorm migration:run",
+    "typeorm:revert": "npm run typeorm migration:revert"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -17,6 +19,8 @@
     "morgan": "^1.10.0",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.1.13",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
     "typeorm": "^0.3.17"
   },
   "devDependencies": {
